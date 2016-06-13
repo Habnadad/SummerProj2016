@@ -22,7 +22,7 @@ public class ClickToMove : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		//if left mouse button is clicked
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButton(0))
 		{
 			//cast a ray out, if it is under 100.0f, move the player
 			if (Physics.Raycast(ray, out hit, 100.0f)) 
