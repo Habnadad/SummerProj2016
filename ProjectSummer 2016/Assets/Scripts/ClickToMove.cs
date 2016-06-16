@@ -24,7 +24,7 @@ public class ClickToMove : MonoBehaviour
 		//if left mouse button is clicked
 		if(Input.GetMouseButton(0))
 		{
-			//cast a ray out, if it is under 100.0f, move the player
+			//cast a ray out, if it is under 100.0f, move the player along navmesh
 			if (Physics.Raycast(ray, out hit, 100.0f)) 
 			{
 				//Debug.Log (hit.point);
