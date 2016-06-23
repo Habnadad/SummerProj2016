@@ -1,0 +1,33 @@
+[
+  //item attributes
+  {
+    "id": 0,
+    "name": "Wood Staff",
+    "stats": 
+    {
+      "str": 1,
+      "agi": 3,
+      "con": 5
+    },
+    "description": "A simple wooden staff.",
+    "stackable":  true,
+    "cost": 6,
+    "slug": "wood_staff"
+  },
+
+  //item attributes
+  {
+    "id": 1,
+    "name": "Ring",
+    "stats": 
+    {
+      "str": 20,
+      "agi": 40,
+      "con": 60
+    },
+    "description": "RING!",
+    "stackable":  false,
+    "cost": 600,
+    "slug": "ring"
+  }
+]
