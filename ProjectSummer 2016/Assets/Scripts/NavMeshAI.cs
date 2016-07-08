@@ -17,12 +17,14 @@ public class NavMeshAI : MonoBehaviour
     public Transform target;
 
     NavMeshAgent m_Agent;
+    CapsuleCollider m_Capsule;
     GameObject m_Player;
     ClickToMove m_PlayerMoveScript;
     float m_AttackTimer = 0;
 
     bool m_Active = false;
-    bool m_Moving = false;
+    bool m_Moving1 = false;
+    bool m_Moving2 = false;
 
     float m_LerpTimer = 0;
 
@@ -33,6 +35,7 @@ public class NavMeshAI : MonoBehaviour
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
+        m_Capsule = GetComponent<CapsuleCollider>();
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_PlayerMoveScript = m_Player.GetComponent<ClickToMove>();
 
@@ -41,7 +44,43 @@ public class NavMeshAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_Active)
+        if (m_Moving1)
+        {
+            float timeSinceStarted = Time.time - m_LerpTimer;
+            float percentageComplete = timeSinceStarted / speed;
+
+            this.transform.position = Vector3.Lerp(startPos, endPos, percentageComplete);
+
+            if (percentageComplete >= 1.0f)
+            {
+                m_LerpTimer = Time.time;
+                startPos = transform.position;
+                endPos = transform.position;
+                endPos.z += crsAmnt;
+                m_Moving1 = false;
+                m_Moving2 = true;
+                //m_Active = true;
+            }
+
+        }
+        if(m_Moving2)
+        {
+            msg = "next move";
+            float timeSinceStarted = Time.time - m_LerpTimer;
+            float percentageComplete = timeSinceStarted / speed;
+
+            this.transform.position = Vector3.Lerp(startPos, endPos, percentageComplete);
+
+            if (percentageComplete >= 1.0f)
+            {
+                m_Moving2 = false;
+                m_Capsule.enabled = true;
+                m_Agent.enabled = true;
+                m_Active = true;
+            }
+        }
+
+        if (m_Active)
         {
             if (Vector3.Distance(m_Agent.transform.position, m_Player.transform.position) < distToTarget)
             {
@@ -83,27 +122,27 @@ public class NavMeshAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (m_Moving)
-        {
-            float timeSinceStarted = Time.time - m_LerpTimer;
-            float percentageComplete = timeSinceStarted / speed;
+        //if (m_Moving)
+        //{
+        //    float timeSinceStarted = Time.time - m_LerpTimer;
+        //    float percentageComplete = timeSinceStarted / speed;
 
-            m_Agent.transform.position = Vector3.Lerp(startPos, endPos, percentageComplete);
+        //    m_Agent.transform.position = Vector3.Lerp(startPos, endPos, percentageComplete);
             
-            if(percentageComplete >= 1.0f)
-            {
-                m_Moving = false;
-                m_Active = true;
-            }
+        //    if(percentageComplete >= 1.0f)
+        //    {
+        //        m_Moving = false;
+        //        m_Active = true;
+        //    }
 
-        }
+        //}
 
 
     }
 
     public void Activate()
     {
-        m_Moving = true;
+        m_Moving1 = true;
         m_LerpTimer = Time.time;
         startPos = transform.position;
         endPos = transform.position;
