@@ -7,9 +7,6 @@ public class SpawnGroup : MonoBehaviour
 
     public GameObject[] m_Enemies;
     public float m_DetectRadius;
-    public int m_ClimbUp;
-    public int m_ClimbAcross;
-    public int m_Speed;
     public float m_SpawnSpeed;
 
     GameObject m_Player;
@@ -53,11 +50,6 @@ public class SpawnGroup : MonoBehaviour
                 {
                     if (m_Timer == 0)
                     {
-                        //Vector3 temppos2 = m_Enemies[m_EnemyCount].transform.position;
-                        //temppos2.y = temppos2.y + m_ClimbUp;//go up given amount
-                        //m_Enemies[m_EnemyCount].transform.position = Vector3.Lerp(m_Enemies[m_EnemyCount].transform.position, temppos2, m_Speed / m_ClimbUp * Time.deltaTime);//lerpppp
-                        //temppos2.x = temppos2.x + m_ClimbAcross;//go across given amount
-                        //m_Enemies[m_EnemyCount].transform.position = Vector3.Lerp(m_Enemies[m_EnemyCount].transform.position, temppos2, m_Speed / m_ClimbUp * Time.deltaTime);//lerpppp
                         m_EnemieAIScript = m_Enemies[m_EnemyCount].GetComponent<NavMeshAI>();
                         m_EnemieAIScript.Activate();
                         m_EnemyCount++;

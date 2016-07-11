@@ -25,6 +25,7 @@ public class NavMeshAI : MonoBehaviour
     bool m_Active = false;
     bool m_Moving1 = false;
     bool m_Moving2 = false;
+    bool m_MouseOver = false;
 
     float m_LerpTimer = 0;
 
@@ -65,7 +66,7 @@ public class NavMeshAI : MonoBehaviour
         }
         if(m_Moving2)
         {
-            msg = "next move";
+            //msg = "next move";
             float timeSinceStarted = Time.time - m_LerpTimer;
             float percentageComplete = timeSinceStarted / speed;
 
@@ -122,22 +123,7 @@ public class NavMeshAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (m_Moving)
-        //{
-        //    float timeSinceStarted = Time.time - m_LerpTimer;
-        //    float percentageComplete = timeSinceStarted / speed;
-
-        //    m_Agent.transform.position = Vector3.Lerp(startPos, endPos, percentageComplete);
-            
-        //    if(percentageComplete >= 1.0f)
-        //    {
-        //        m_Moving = false;
-        //        m_Active = true;
-        //    }
-
-        //}
-
-
+   
     }
 
     public void Activate()
@@ -149,9 +135,20 @@ public class NavMeshAI : MonoBehaviour
         endPos.y += upAmnt;
 
     }
+    void OnMouseEnter()
+    {
+        m_MouseOver = true;
+    }
+    void OnMouseExit()
+    {
+        m_MouseOver = false;
+    }
 
     void OnGUI()
     {
-        GUI.Box(new Rect(10, 10, 270, 50), "Enemy: " + msg);
+        if (m_MouseOver)
+        {
+            GUI.Box(new Rect(300, 10, 270, 50), "Enemy: " + name);
+        }
     }
 }
