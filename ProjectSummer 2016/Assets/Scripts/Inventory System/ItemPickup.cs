@@ -5,11 +5,14 @@ public class ItemPickup : MonoBehaviour
 {
     public int ItemID;
     bool mouseOver = false;
+    GameObject highlightCircle;
+    Hover hoverScript;
 
 	// Use this for initialization
 	void Start ()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        highlightCircle = GameObject.FindGameObjectWithTag("Highlight");
+        hoverScript = highlightCircle.GetComponent<Hover>();
     }
 	
 	// Update is called once per frame
@@ -21,12 +24,12 @@ public class ItemPickup : MonoBehaviour
     void OnMouseEnter()
     {
         mouseOver = true;
-        transform.GetChild(0).gameObject.SetActive(true);
+        hoverScript.OnHover(this.gameObject);   
     }
     void OnMouseExit()
     {
         mouseOver = false;
-        transform.GetChild(0).gameObject.SetActive(false);
+        hoverScript.OffHover();
     }
 
     void OnGUI()

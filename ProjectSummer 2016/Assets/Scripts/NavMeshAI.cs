@@ -18,8 +18,14 @@ public class NavMeshAI : MonoBehaviour
 
     NavMeshAgent m_Agent;
     CapsuleCollider m_Capsule;
+
     GameObject m_Player;
     ClickToMove m_PlayerMoveScript;
+
+    GameObject highlightCircle;
+    Hover hoverScript;
+
+
     float m_AttackTimer = 0;
 
     bool m_Active = false;
@@ -37,8 +43,12 @@ public class NavMeshAI : MonoBehaviour
     {
         m_Agent = GetComponent<NavMeshAgent>();
         m_Capsule = GetComponent<CapsuleCollider>();
+
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_PlayerMoveScript = m_Player.GetComponent<ClickToMove>();
+
+        highlightCircle = GameObject.FindGameObjectWithTag("Highlight");
+        hoverScript = highlightCircle.GetComponent<Hover>();
 
     }
 
@@ -138,10 +148,12 @@ public class NavMeshAI : MonoBehaviour
     void OnMouseEnter()
     {
         m_MouseOver = true;
+        hoverScript.OnHover(this.gameObject);
     }
     void OnMouseExit()
     {
         m_MouseOver = false;
+        hoverScript.OffHover();
     }
 
     void OnGUI()
