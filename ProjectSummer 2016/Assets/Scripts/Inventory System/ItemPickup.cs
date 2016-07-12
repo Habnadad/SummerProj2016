@@ -21,22 +21,22 @@ public class ItemPickup : MonoBehaviour
 	    
 	}
 
-    void OnMouseEnter()
+    void OnMouseEnter()//when mouse is over this game object
     {
         mouseOver = true;
-        hoverScript.OnHover(this.gameObject);   
+        hoverScript.OnHover(this.gameObject);   //call function from hovering object script
     }
-    void OnMouseExit()
+    void OnMouseExit()//when mouse leaves game object
     {
         mouseOver = false;
-        hoverScript.OffHover();
+        hoverScript.OffHover();//call function from hovering object script
     }
 
     void OnGUI()
     {
         if(mouseOver)
         {
-            GUI.Box(new Rect(300, 10, 270, 50), "Item: " + name);
+            GUI.Box(new Rect(300, 10, 270, 50), "Item: " + name);//simple item name display
         }
     }
 

@@ -16,26 +16,26 @@ public class Hover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(hovering)
+        if(hovering) // if mouse over gameobject
         {
-            tempPos = whatImOn.transform.position;
-            tempPos.y = 0;
-            transform.position = tempPos;
+            tempPos = whatImOn.transform.position; //store pos in vector
+            tempPos.y = 0;//y is always 0
+            transform.position = tempPos;//make position same as game object
         }
 	
 	}
 
     public void OnHover(GameObject something)
     {
-        gameObject.SetActive(true);
-        hovering = true;
-        whatImOn = something;
+        gameObject.SetActive(true);//become visable
+        hovering = true;//now hovering over something
+        whatImOn = something;//game object stored into variable
     }
 
     public void OffHover()
     {
-        gameObject.SetActive(false);
-        hovering = false;
+        gameObject.SetActive(false);//become invis
+        hovering = false;//not hovering
     }
 
 
